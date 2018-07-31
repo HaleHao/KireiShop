@@ -12,4 +12,16 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
 
+    $router->resource('member' , 'MemberController' , [
+			'names' => [
+					'show' => 'admin.member.show' ,
+			] ,
+	] );
+
+    $router->resource('authmember' , 'AuthMemberController' , [
+        'names' => [
+            'edit' => 'admin.authmember.edit'
+        ] ,
+    ] );
+
 });
