@@ -18,6 +18,7 @@ class MemberController extends Controller
 {
     use ModelForm ;
 
+    //会员列表
     public function index()
     {
         return Admin::content(function (Content $content) {
