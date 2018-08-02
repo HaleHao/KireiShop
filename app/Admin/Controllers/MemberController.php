@@ -43,7 +43,7 @@ class MemberController extends Controller
                 return trim( $v ) != '' ? data_get( config('global.gender' ) , $v , '' ) : '未知';
             });
             $grid->auth_status('认证状态')->display(function ($v) {
-                return data_get(config('global.auth_status'), $v);
+                return data_get(config('global.auth_member_status'), $v);
             })->label();
             $grid->create_time('注册时间')->display(function($v) {
                 return $v ? date('Y-m-d' , $v ) : '' ;
@@ -60,7 +60,7 @@ class MemberController extends Controller
            $grid->filter( function( Filter $filter ){
                $filter->equal('phone_mob' , '手机号码');
                $filter->like('real_name' , '真实姓名');
-               $filter->equal('auth_status' , '审核状态')->select( config('global.auth_status') );
+               $filter->equal('auth_member_status' , '认证状态')->select( config('global.auth_member_status') );
            });
         });
     }
@@ -92,7 +92,7 @@ class MemberController extends Controller
             } );
             $form->display('email' , 'Email');
             $form->display('auth_status' , '认证状态')->with( function( $v ){
-                return data_get( config('global.auth_status' ) , $v ) ;
+                return data_get( config('global.auth_member_status' ) , $v ) ;
             }) ;
             $form->display('address' , '居住地址');
             $form->display('brithday' , '出生日期')->with( function( $v ){

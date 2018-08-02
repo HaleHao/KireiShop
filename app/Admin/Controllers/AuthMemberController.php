@@ -60,7 +60,7 @@ class AuthMemberController extends Controller
             //$grid->updated_at();
             $grid->disableRowSelector();
             $grid->disableExport();
-//            $grid->disableCreateButton();
+            $grid->disableCreateButton();
             $grid->actions( function( Actions $action ){ 
             	$action->disableDelete();
             	$action->disableEdit();

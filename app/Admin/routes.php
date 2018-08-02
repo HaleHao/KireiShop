@@ -27,4 +27,7 @@ Route::group([
         ] ,
     ] );
 
+    $router->resource('goods' , 'GoodsController');
+
+    $router->resource('brand' , 'BrandController');
 });
