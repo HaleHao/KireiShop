@@ -28,6 +28,8 @@ Route::group([
     ] );
 
     $router->resource('goods' , 'GoodsController');
-
+    //品牌管里
     $router->resource('brand' , 'BrandController');
+    //商城商品分类管理
+    $router->resource('category' , 'CategoryController');
 });

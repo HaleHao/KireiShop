@@ -10,12 +10,8 @@ use Encore\Admin\Layout\Content;
 use App\Http\Controllers\Controller;
 use Encore\Admin\Controllers\ModelForm;
 use App\Http\Models\Goods ;
-use App\Http\Models\GoodsFeedback ;
 use Encore\Admin\Grid\Filter;
-use App\Http\Models\Goodscate;
-use App\Admin\Controllers\Mall\CategoryController;
-use App\Admin\Extensions\Exporter\GoodsExporter;
-use App\Admin\Extensions\Exporter\GoodsFeedbackExporter;
+
 
 class GoodsController extends Controller
 {
@@ -50,6 +46,9 @@ class GoodsController extends Controller
             $grid->gid('ID')->sortable();
             $grid->title('商品名称')->limit(20);
             $grid->description('商品简介')->limit(20);
+            $grid->column('brand.name' , '品牌名称')->display(function( $v ){
+                return $v ? $v :'' ;
+            })->limit(20);
             $grid->original_price('原价')->sortable();
             $grid->promotion_price('促销价')->sortable();
             $grid->hits('点击数')->sortable();
@@ -129,12 +128,12 @@ class GoodsController extends Controller
 //                    ])
 //                    ->options( function(){
 //                        return Goodscate::where('pid' , 0 )->pluck('name' , 'cid' );
-//                    })->load('cid' , '/admin/api/brand');
-//                $form->select('cid' , '商品品牌')->rules('required' , [
-//                    'required' => '请选择商品品牌'
-//                ])->options(function(){
-//                    return Goodscate::where('pid' , $this->sid )->pluck('name' , 'cid' );
-//                });
+////                    })->load('cid' , '/admin/api/brand');
+                $form->select('bid' , '商品品牌')->rules('required' , [
+                    'required' => '请选择商品品牌'
+                ])->options(function(){
+                    return GoodsBrand::pluck('name' , 'bid' );
+                });
                 $form->currency('original_price' , '商品原价')->symbol("¥")->rules('required' , [
                     'required' => '请填写商品原价'
                 ]);
